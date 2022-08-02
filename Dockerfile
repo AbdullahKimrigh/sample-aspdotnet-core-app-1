@@ -5,7 +5,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS build
 WORKDIR /src
 COPY ["ASP.NETCoreDemos.csproj", "sample-aspdotnet-core-app-1/"]
-RUN dotnet restore "sample-aspdotnet-core-app-1/ASP.NETCoreDemos.csproj"
+RUN dotnet restore "ASP.NETCoreDemos.csproj"
 WORKDIR "/src/sample-aspdotnet-core-app-1"
 COPY . .
 RUN dotnet build "ASP.NETCoreDemos.csproj" -c Relaese -o /app/build
