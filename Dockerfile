@@ -2,13 +2,13 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["ASP.NETCoreDemos.csproj", "sample-aspdotnet-core-app-1/"]
+COPY ["ASP.NETCoreDemos.csproj", "./"]
 RUN dotnet restore "ASP.NETCoreDemos.csproj"
-WORKDIR "/src/sample-aspdotnet-core-app-1"
 COPY . .
-RUN dotnet build "ASP.NETCoreDemos.csproj" -c Relaese -o /app/build
+WORKDIR "/src/."
+RUN dotnet build "ASP.NETCoreDemos.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "ASP.NETCoreDemos.csproj" -c Release -o /app/publish
